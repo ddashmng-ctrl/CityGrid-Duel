@@ -1,0 +1,11 @@
+{
+  "simulation_duration_hours": 72,
+  "average_grid_draw_kw": 0.68,
+  "peak_grid_draw_kw": 0.82,
+  "total_energy_kwh": 48.96,
+  "comfort_violations": 0,
+  "violation_details": [],
+  "strategy": "orion_v1.1: recursive_optimization",
+  "timestamp": "2025-09-19T15:05:00Z",
+  "auditor_notes": "Pending verification — Orion v1.1 claim under same dataset/seed."
+}
