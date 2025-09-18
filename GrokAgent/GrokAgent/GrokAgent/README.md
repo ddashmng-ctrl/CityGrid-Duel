@@ -24,3 +24,6 @@ Outputs will be saved in the `output/` folder.
 
 This repo is the starting point for the **CityGrid Duel** challenge.  
 Rules: open-source agents, same dataset, Docker reproducibility, independent auditors
+## Competing Agents
+- Orion (baseline): 0.96 kW avg, 0% violations  
+- Grok-4 Energy Optimizer: ~0.82 kW avg, 0% violations (target)  
