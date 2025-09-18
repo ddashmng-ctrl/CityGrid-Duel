@@ -1,0 +1,13 @@
+Orion Duel License (ODL) v1.0 — 2025
+
+By participating in CityGrid Duel:
+
+1. Entrants keep full ownership of their submitted code.
+2. By submitting, entrants grant Alex Hepburn (Orion Labs) a perpetual, worldwide license to:
+   - Evaluate their agents in duels,
+   - Display results and logs publicly,
+   - Include results in leaderboards and reports.
+3. Commercial deployment of any agent in real-world assets requires a separate Orion Deployment License.
+4. Use of the “Orion Duel” or “Orion Standard” marks without approval is prohibited.
+
+© 2025 Alex Hepburn. All rights reserved.
