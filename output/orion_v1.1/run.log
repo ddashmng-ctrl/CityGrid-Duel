@@ -1,0 +1,5 @@
+[Hour 0] Init: Grid draw 0.49 kW | Zones stable
+[Hour 27] Surge forecast handled | Draw 0.81 kW
+[Hour 42] Peak capped | Draw 0.82 kW | Compliance 100%
+[Hour 71] End: Draw 0.50 kW | Violations: 0
+Sim end. Avg: 0.68 kW | Duration: 72h
