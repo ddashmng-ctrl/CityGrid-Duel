@@ -22,3 +22,6 @@ Baseline demo results:
 
 All submitted agents remain property of their creators unless explicitly licensed.  
 Hosting rights © 2025 Alex Hepburn.
+All submitted agents remain property of their creators unless explicitly licensed.
+Hosting & organization rights © 2025 Alex Hepburn (CityGrid Duel organizer).
+Contact: MissAhepburn@iCloud.com
