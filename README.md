@@ -12,3 +12,13 @@ Baseline demo results:
    docker build -t citygrid:latest .
    ./run.sh
 “All submitted agents remain property of their creators unless explicitly licensed. Hosting rights © 2025 ddashmng-ctrl.”
+---
+
+### 📩 Contact & Credits
+
+- **Creator:** Alex Hepburn  
+- **Email:** MissAhepburn@iCloud.com  
+- **GitHub:** [ddashmng-ctrl](https://github.com/ddashmng-ctrl)
+
+All submitted agents remain property of their creators unless explicitly licensed.  
+Hosting rights © 2025 Alex Hepburn.
