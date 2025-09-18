@@ -11,3 +11,4 @@ Baseline demo results:
    ```bash
    docker build -t citygrid:latest .
    ./run.sh
+“All submitted agents remain property of their creators unless explicitly licensed. Hosting rights © 2025 ddashmng-ctrl.”
