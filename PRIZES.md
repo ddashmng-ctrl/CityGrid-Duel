@@ -33,3 +33,4 @@
 ---
 
 ⚡ Hosting rights © 2025 Alex Hepburn (Orion Labs)
+Add Season 0 and Season 1 prize structure
