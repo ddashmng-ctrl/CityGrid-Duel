@@ -1,0 +1,12 @@
+{
+  "simulation_duration_hours": 72,
+  "average_grid_draw_kw": 0.96,
+  "peak_grid_draw_kw": 1.20,
+  "total_energy_kwh": 69.12,
+  "comfort_violations": 0,
+  "violation_details": [],
+  "strategy": "baseline_v1",
+  "seed": 42,
+  "timestamp": "2025-09-18T00:00:00Z",
+  "auditor_notes": "Baseline demo"
+}
