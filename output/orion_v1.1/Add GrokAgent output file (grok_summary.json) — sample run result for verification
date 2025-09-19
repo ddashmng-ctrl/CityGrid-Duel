@@ -1,0 +1,12 @@
+{
+  "simulation_duration_hours": 24,
+  "average_grid_draw_kw": 0.82,
+  "peak_grid_draw_kw": 1.50,
+  "total_energy_kwh": 19.7,
+  "comfort_violations": 0,
+  "violation_details": [],
+  "strategy": "grok_v1: heuristic_demand_forecast",
+  "seed": 42,
+  "timestamp": "2025-09-19T20:45:00Z",
+  "auditor_notes": "Sample output file for verification format"
+}
