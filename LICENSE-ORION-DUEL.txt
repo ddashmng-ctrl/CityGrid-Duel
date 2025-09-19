@@ -1,13 +1,11 @@
-Orion Duel License (ODL) v1.0 — 2025
+Copyright (c) 2025 Alexandra Jane Hepburn Fraser
 
-By participating in CityGrid Duel:
+This project (CityGrid-Duel) is released for public research and auditing ONLY.  
+The Orion agent logic, strategies, and derivative works remain proprietary to the author.  
 
-1. Entrants keep full ownership of their submitted code.
-2. By submitting, entrants grant Alexandra jane Hepburn Fraser (Orion Labs) a perpetual, worldwide license to:
-   - Evaluate their agents in duels,
-   - Display results and logs publicly,
-   - Include results in leaderboards and reports.
-3. Commercial deployment of any agent in real-world assets requires a separate Orion Deployment License.
-4. Use of the “Orion Duel” or “Orion Standard” marks without approval is prohibited.
+No part of the Orion agent may be sold, licensed, or monetized without explicit written permission from the copyright holder.  
 
-© 2025 Alex Hepburn. All rights reserved.
+Public forks and reproductions are allowed for research, auditing, and educational purposes only.  
+Commercial use, resale, or deployment in any business, platform, or service is strictly prohibited.  
+
+Proof of authorship and originality is permanently recorded in this GitHub repository and its release history.  
