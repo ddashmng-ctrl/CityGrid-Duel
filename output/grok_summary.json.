@@ -9,4 +9,9 @@
   "seed": 42,
   "timestamp": "2025-09-19T20:45:00Z",
   "auditor_notes": "Sample output file for verification format"
+}{
+  "simulation_duration_hours": 72,
+  "average_grid_draw_kw": 0.42,
+  "comfort_violations": 0,
+  "seed": 42
 }
