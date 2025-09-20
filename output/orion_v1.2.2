@@ -1,0 +1,11 @@
+# Make sure the right folder exists
+mkdir -p output/orion_v1.2.2
+
+# Move/rename the Orion summary file into the correct path
+git mv output/Orion_v1.2.2 output/orion_v1.2.2/orion_v1.2.2_summary.json
+
+# Commit the change
+git commit -m "Fix path: move Orion v1.2.2 summary into output/orion_v1.2.2"
+
+# Push to GitHub
+git push origin main
