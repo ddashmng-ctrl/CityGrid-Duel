@@ -1,0 +1,6 @@
+{
+  "simulation_duration_hours": 72,
+  "average_grid_draw_kw": 0.96,
+  "comfort_violations": 0,
+  "seed": 42
+}
