@@ -22,3 +22,8 @@ For collaborations, verification, or media inquiries:
 📧 Email: citygridduel@proton.me
 🐦 X (Twitter): @citygridduel
 📂 GitHub Issues: open an issue in this repo
+---
+
+📜 **License**  
+This project is covered by a custom license.  
+See [LICENSE.md](./LICENSE.md) for details.  
