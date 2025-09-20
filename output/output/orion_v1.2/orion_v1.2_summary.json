@@ -1,12 +1,11 @@
 {
   "simulation_duration_hours": 72,
   "average_grid_draw_kw": 0.40,
-  "peak_grid_draw_kw": 0.78,
-  "total_energy_kwh": 28.8,
   "comfort_violations": 0,
-  "violation_details": [],
-  "strategy": "orion_v1.2: deep_recursive_forecasting + adaptive comfort",
-  "seed": 42,
-  "timestamp": "2025-09-19T23:59:00Z",
-  "auditor_notes": "Pending independent verification"
-}
+  "seed": 42
+}{
+  "simulation_duration_hours": 72,
+  "average_grid_draw_kw": 0.40,
+  "comfort_violations": 0,
+  "seed": 42
+}}
