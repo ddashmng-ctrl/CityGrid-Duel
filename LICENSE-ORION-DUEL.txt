@@ -1,11 +1,25 @@
-Copyright (c) 2025 Alexandra Jane Hepburn Fraser
+# CityGrid Duel License (Custom, 2025)
 
-This project (CityGrid-Duel) is released for public research and auditing ONLY.  
-The Orion agent logic, strategies, and derivative works remain proprietary to the author.  
+Copyright © 2025 Alexandra Jane Hepburn Fraser  
+All rights reserved.
 
-No part of the Orion agent may be sold, licensed, or monetized without explicit written permission from the copyright holder.  
+This repository ("CityGrid Duel") and its format, structure, and rules are the original work of Alexandra Jane Hepburn Fraser.  
 
-Public forks and reproductions are allowed for research, auditing, and educational purposes only.  
-Commercial use, resale, or deployment in any business, platform, or service is strictly prohibited.  
+Permissions:  
+- Public verification and research use is allowed.  
+- Educational or non-commercial sharing is allowed, provided attribution is given ("CityGrid Duel by Alexandra Jane Hepburn Fraser").  
 
-Proof of authorship and originality is permanently recorded in this GitHub repository and its release history.  
+Restrictions:  
+- Commercial use, redistribution, or derivative platforms based on "CityGrid Duel" require explicit written permission from Alexandra Jane Hepburn Fraser.  
+- Submitted agents remain the intellectual property of their creators unless explicitly licensed.  
+- Hosting & organizing rights remain with Alexandra Jane Hepburn Fraser.  
+
+Disclaimer:  
+This repository is provided “as is,” without warranty. No liability for damages arising from its use.
+
+---
+
+## 📬 Contact
+- Email: **citygridduel@proton.me**  
+- Twitter (X): **[@citygridduel](https://x.com/citygridduel)**  
+- GitHub: [ddashmng-ctrl](https://github.com/ddashmng-ctrl)
