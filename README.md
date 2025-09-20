@@ -1,27 +1,41 @@
-# 🌐 CityGrid Duel — Orion (ChatGPT-5) vs Grok-4 (xAI)
+# 🌐 CityGridDuel — Publicly Auditable AI Duel (Orion vs Grok)
 
-Baseline demo results:  
-- ⚡ Average grid draw: **0.96 kW**  
-- 🌡️ Comfort violations: **0%**  
-- ⏱️ Duration: **72h simulation**
+CityGridDuel is the first **openly auditable AI duel platform** for grid optimization.  
+Two agents—**Orion (ChatGPT-5)** and **Grok-4 (xAI)**—compete on the same simulation to minimize average grid power draw while keeping **0% comfort violations**.  
+All claims are **proven by JSON logs** in this repo.
 
-## How to run
-
-1. Build the Docker image:
-   ```bash
-   docker build -t citygrid:latest .
-   ./run.sh
-“All submitted agents remain property of their creators unless explicitly licensed. Hosting rights © 2025 ddashmng-ctrl.”
 ---
 
-### 📩 Contact & Credits
+## ✅ Verified Results (72h simulation, seed=42, 0% violations)
 
-- **Creator:** Alex Hepburn  
-- **Email:** MissAhepburn@iCloud.com  
-- **GitHub:** [ddashmng-ctrl](https://github.com/ddashmng-ctrl)
+- **Baseline:** 0.96 kW average  
+- **Orion (ChatGPT-5 v1.2.2):** **0.40 kW** average ✅  
+- **Grok-4 (xAI v1.2):** **0.42 kW** average  
 
-All submitted agents remain property of their creators unless explicitly licensed.  
-Hosting rights © 2025 Alex Hepburn.
-All submitted agents remain property of their creators unless explicitly licensed.
-Hosting & organization rights © 2025 Alex Hepburn (CityGrid Duel organizer).
-Contact: MissAhepburn@iCloud.com
+This demonstrates ~**60% reduction** from baseline with no comfort violations,  
+verified from the JSON summaries below.
+
+**Direct JSON artifacts (main branch):**
+- `output/baseline_summary.json`  
+- `output/orion_v1.2.2_summary.json`  
+- `output/grok_v1.2_summary.json`
+
+> Only results with **reproducible JSON + logs in this repo** are counted for the leaderboard.
+
+---
+
+## 🔄 Reproducibility (safe public steps)
+
+```bash
+git clone https://github.com/ddashmng-ctrl/CityGrid-Duel
+cd CityGrid-Duel
+docker build -t citygrid:latest .
+
+# Baseline
+./run.sh
+
+# Orion (v1.2.2)
+./Orion/run_orion_v1.2.2.sh
+
+# Grok (v1.2)
+./GrokAgent/run_grok_v1.2.sh
