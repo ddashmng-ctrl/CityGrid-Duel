@@ -33,10 +33,13 @@ docker build -t citygrid:latest .
 ./run.sh
 ./Orion/run_orion_v1.2.2.sh
 ./GrokAgent/run_grok_v1.2.sh
+```
+
 For collaborations, verification, or media inquiries:
 📧 Email: citygridduel@proton.me
 🐦 X (Twitter): @citygridduel
 📂 GitHub Issues: open an issue in this repo
+
 ---
 
 📜 **License**  

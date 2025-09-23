@@ -1,0 +1,36 @@
+name: Logs Pipeline
+
+on:
+  push:
+    paths:
+      - 'logs/*.json'
+  pull_request:
+    paths:
+      - 'logs/*.json'
+
+jobs:
+  update-logs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install markdown
+
+      - name: Generate aggregated logs CSV
+        run: python tools/generate_aggregated_logs.py
+
+      - name: Generate dashboard
+        run: python tools/generate_dashboard.py
+
+      - name: Commit updated files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add logs/aggregated_logs.csv docs/soul_debate/README.md || true
+          git diff --staged --quiet || git commit -m "Auto-update logs and documentation"
+          git push || true
