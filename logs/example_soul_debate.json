@@ -12,5 +12,6 @@
   ],
   "entropy": 1.88,
   "mutual_information": 0.39,
-  "text": "Ache and erosion recur not as random noise but as markers of sustained narrative strain."
+  "text": "Ache and erosion recur not as random noise but as markers of sustained narrative strain.",
+  "_workflow_test": "Enhanced with auto-labeling pipeline"
 }

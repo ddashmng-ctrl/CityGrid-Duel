@@ -3,8 +3,6 @@ name: Logs Pipeline - Auto-Label
 on:
   pull_request:
     types: [opened, synchronize, edited]
-    paths:
-      - 'logs/**'
 
 jobs:
   auto-label-logs:
