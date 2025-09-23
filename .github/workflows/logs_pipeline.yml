@@ -87,12 +87,7 @@ jobs:
               const summaryContent = readmeContent.trim();
               
               // Create the comment body
-              const commentBody = `## 🧠 Soul Debate Logs Analysis
-              
-${summaryContent}
-
----
-*This summary was automatically generated from log analysis. Updated: ${new Date().toISOString()}*`;
+              const commentBody = '## 🧠 Soul Debate Logs Analysis\n\n' + summaryContent + '\n\n---\n*This summary was automatically generated from log analysis. Updated: ' + new Date().toISOString() + '*';
 
               // Check if we're in a PR context
               if (!context.payload.pull_request) {
