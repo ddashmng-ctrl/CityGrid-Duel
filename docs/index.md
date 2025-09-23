@@ -11,7 +11,7 @@ World's first auditable AI duel platform.
 
 ## ✅ Verified Results (72h simulation, seed=42, 0% violations)
 - **Baseline:** 0.96 kW avg  
-- **Orion (ChatGPT-5 v1.2.2):** 0.40 kW avg ✅  
+- **Orion (ChatGPT-5 v1.2.2):** 0.40 kW avg ✅ 🥇  
 - **Grok-4 (xAI v1.2):** 0.42 kW avg  
 
 This demonstrates ~60% reduction from baseline with no comfort violations,  
@@ -22,7 +22,9 @@ verified via reproducible JSON logs in this repo.
 🏆 Leaderboard is updated automatically via PR comments.  
 Submit your duel → see your run show up live.
 
+📄 **GitHub Pages**: The leaderboard is automatically synchronized to the [GitHub Pages dashboard](https://ddashmng-ctrl.github.io/CityGrid-Duel/) whenever this README is updated.
+
 ---
 
 *This leaderboard is automatically synchronized from README.md*
-*Last updated: 2025-09-23 20:01:39 UTC*
+*Last updated: 2025-09-23 20:03:26 UTC*

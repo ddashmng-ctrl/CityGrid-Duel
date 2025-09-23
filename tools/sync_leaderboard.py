@@ -12,13 +12,13 @@ from pathlib import Path
 def extract_leaderboard_sections(readme_content):
     """Extract the verified results and leaderboard sections from README.md"""
     
-    # Extract the "Verified Results" section
-    verified_pattern = r'(## ✅ Verified Results.*?)(?=\n## |\nFor collaborations|\Z)'
+    # Extract the "Verified Results" section - more flexible pattern
+    verified_pattern = r'(## ✅ Verified Results.*?)(?=\n## [^#]|\nFor collaborations|\n---|\Z)'
     verified_match = re.search(verified_pattern, readme_content, re.DOTALL)
     verified_section = verified_match.group(1).strip() if verified_match else ""
     
-    # Extract the "Leaderboard" section
-    leaderboard_pattern = r'(## 🏆 Leaderboard.*?)(?=\n---|\n## |\Z)'
+    # Extract the "Leaderboard" section - more flexible pattern  
+    leaderboard_pattern = r'(## 🏆 Leaderboard.*?)(?=\n---|\n## [^#]|\Z)'
     leaderboard_match = re.search(leaderboard_pattern, readme_content, re.DOTALL)
     leaderboard_section = leaderboard_match.group(1).strip() if leaderboard_match else ""
     
