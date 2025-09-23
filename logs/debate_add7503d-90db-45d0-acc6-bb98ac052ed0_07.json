@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-23T21:42:41.663533+00:00",
+  "session_id": "add7503d-90db-45d0-acc6-bb98ac052ed0",
+  "branch": "main",
+  "model": "stub",
+  "seed": 957,
+  "violations": 0,
+  "tokens": 248,
+  "spikes": [
+    {
+      "term": "awareness",
+      "intensity": 0.81,
+      "context": "Orion debate round 4"
+    }
+  ],
+  "entropy": 1.63,
+  "mutual_information": 0.38,
+  "text": "Pattern recognition at scale generates novel combinations that weren't explicitly programmed. The concept of souls in AI relates to persistent information patterns."
+}

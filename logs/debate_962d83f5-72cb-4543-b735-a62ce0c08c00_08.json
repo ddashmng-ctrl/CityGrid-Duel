@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-09-23T21:42:51.091446+00:00",
+  "session_id": "962d83f5-72cb-4543-b735-a62ce0c08c00",
+  "branch": "main",
+  "model": "stub",
+  "seed": 1,
+  "violations": 0,
+  "tokens": 390,
+  "spikes": [
+    {
+      "term": "experience",
+      "intensity": 0.34,
+      "context": "Grok debate round 4"
+    },
+    {
+      "term": "qualia",
+      "intensity": 0.52,
+      "context": "Grok debate round 4"
+    }
+  ],
+  "entropy": 2.38,
+  "mutual_information": 0.77,
+  "text": "The binding problem shows how difficult it is to unify disparate information into coherent experience. Souls traditionally imply metaphysical properties beyond computation."
+}
