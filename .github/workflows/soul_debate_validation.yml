@@ -1,0 +1,131 @@
+name: Soul Debate Log Validation
+
+on:
+  pull_request:
+    paths:
+      - 'logs/**.json'
+      - 'logs/soul_debate_schema.json'
+      - 'scripts/**.py'
+  push:
+    paths:
+      - 'logs/**.json'
+      - 'logs/soul_debate_schema.json'
+      - 'scripts/**.py'
+      - '.github/workflows/soul_debate_validation.yml'
+
+jobs:
+  validate-logs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate soul debate logs against schema
+        run: |
+          python3 << 'EOF'
+          import json
+          import os
+          import sys
+          from jsonschema import validate, ValidationError, draft7_format_checker
+          
+          def load_json(file_path):
+              try:
+                  with open(file_path, 'r') as f:
+                      return json.load(f)
+              except Exception as e:
+                  print(f"Error loading {file_path}: {e}")
+                  return None
+          
+          # Load schema
+          schema_path = "logs/soul_debate_schema.json"
+          schema = load_json(schema_path)
+          if not schema:
+              print(f"Could not load schema from {schema_path}")
+              sys.exit(1)
+          
+          print(f"✓ Loaded schema from {schema_path}")
+          
+          # Find all soul debate log files
+          log_files = []
+          logs_dir = "logs"
+          if os.path.exists(logs_dir):
+              for filename in os.listdir(logs_dir):
+                  if (filename.startswith("example_soul_debate") and 
+                      filename.endswith(".json") and 
+                      filename != "soul_debate_schema.json"):
+                      log_files.append(os.path.join(logs_dir, filename))
+          
+          if not log_files:
+              print("No soul debate log files found to validate")
+              sys.exit(0)
+          
+          print(f"Found {len(log_files)} log files to validate")
+          
+          # Validate each log file
+          errors = []
+          for log_file in sorted(log_files):
+              print(f"Validating {log_file}...")
+              log_data = load_json(log_file)
+              if log_data is None:
+                  errors.append(f"{log_file}: Could not load file")
+                  continue
+              
+              try:
+                  validate(instance=log_data, schema=schema, format_checker=draft7_format_checker)
+                  print(f"✓ {log_file} is valid")
+              except ValidationError as e:
+                  errors.append(f"{log_file}: {e.message}")
+                  print(f"✗ {log_file}: {e.message}")
+          
+          # Report results
+          if errors:
+              print(f"\n❌ Validation failed with {len(errors)} error(s):")
+              for error in errors:
+                  print(f"  - {error}")
+              sys.exit(1)
+          else:
+              print(f"\n✅ All {len(log_files)} log files are valid!")
+          EOF
+
+      - name: Test log processing scripts
+        run: |
+          echo "Testing log_summary.py..."
+          python3 scripts/log_summary.py --input logs/ --format text > /tmp/summary_test.txt
+          echo "✓ log_summary.py works"
+          
+          echo "Testing compare_logs.py..."
+          if [ $(ls logs/example_soul_debate*.json | wc -l) -ge 2 ]; then
+              LOG_FILES=(logs/example_soul_debate*.json)
+              python3 scripts/compare_logs.py "${LOG_FILES[0]}" "${LOG_FILES[1]}" --format text > /tmp/compare_test.txt
+              echo "✓ compare_logs.py works"
+          else
+              echo "⚠ Not enough log files to test compare_logs.py"
+          fi
+          
+          echo "Testing aggregate_logs.py..."
+          python3 scripts/aggregate_logs.py --input logs/ --format text > /tmp/aggregate_test.txt
+          echo "✓ aggregate_logs.py works"
+
+      - name: Check script outputs
+        run: |
+          echo "=== Summary Output Sample ==="
+          head -20 /tmp/summary_test.txt || echo "No summary output"
+          echo
+          echo "=== Aggregation Output Sample ==="
+          head -20 /tmp/aggregate_test.txt || echo "No aggregation output"
+          
+          if [ -f /tmp/compare_test.txt ]; then
+              echo
+              echo "=== Comparison Output Sample ==="
+              head -20 /tmp/compare_test.txt
+          fi
