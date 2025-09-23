@@ -1,0 +1,133 @@
+name: Soul Debate Logs Pipeline
+
+on:
+  push:
+    paths:
+      - 'logs/soul_debate*.json'
+      - 'tools/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+  pull_request:
+    paths:
+      - 'logs/soul_debate*.json'
+      - 'tools/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+
+jobs:
+  summarize_logs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Run log summarization
+        id: summarize
+        run: |
+          python tools/summarize_logs.py
+          echo "Log summarization completed"
+        continue-on-error: true
+      
+      - name: Read and post summary table
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            try {
+              // Read the README file
+              const readmePath = 'docs/soul_debate/README.md';
+              const readmeContent = fs.readFileSync(readmePath, 'utf8');
+              
+              // Extract the table section
+              const tableSectionStart = readmeContent.indexOf('## Summary Table');
+              if (tableSectionStart === -1) {
+                console.log('No Summary Table section found in README');
+                return;
+              }
+              
+              // Find the end of the table section (next ## header or end of file)
+              let tableSectionEnd = readmeContent.indexOf('\n##', tableSectionStart + 1);
+              if (tableSectionEnd === -1) {
+                tableSectionEnd = readmeContent.length;
+              }
+              
+              const tableSection = readmeContent.substring(tableSectionStart, tableSectionEnd).trim();
+              
+              if (!tableSection) {
+                console.log('Table section is empty');
+                return;
+              }
+              
+              // Create the comment body
+              const commentBody = `## 📊 CityGridDuel Log Summary (auto-generated)\n\n${tableSection}\n\n---\n*This summary is automatically generated from soul debate logs. Last updated: ${new Date().toISOString()}*`;
+              
+              // Check for existing comment
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+              
+              const existingComment = comments.find(comment => 
+                comment.body.includes('📊 CityGridDuel Log Summary (auto-generated)')
+              );
+              
+              if (existingComment) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existingComment.id,
+                  body: commentBody
+                });
+                console.log('Updated existing comment');
+              } else {
+                // Create new comment
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: commentBody
+                });
+                console.log('Created new comment');
+              }
+              
+            } catch (error) {
+              console.error('Error processing summary table:', error);
+              
+              // Post error comment if something goes wrong
+              const errorComment = `## 📊 CityGridDuel Log Summary (auto-generated)\n\n⚠️ Error generating log summary: ${error.message}\n\nPlease check the workflow logs for more details.\n\n---\n*This summary is automatically generated from soul debate logs. Last updated: ${new Date().toISOString()}*`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: errorComment
+              });
+            }
+      
+      - name: Commit updated README (if changed)
+        if: github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if git diff --quiet docs/soul_debate/README.md; then
+            echo "No changes to commit"
+          else
+            git add docs/soul_debate/README.md
+            git commit -m "Auto-update soul debate log summary table"
+            git push
+          fi
