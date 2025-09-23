@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "aggregation_timestamp": null,
+    "total_files_processed": 4,
+    "files_processed": [
+      "example_soul_debate_control.json",
+      "example_soul_debate.json",
+      "soul_debate_schema.json",
+      "example_soul_debate_2.json"
+    ]
+  },
+  "summary": {
+    "total_runs": 4,
+    "successful_runs": 4,
+    "average_entropy": 1.8925,
+    "average_mi_spikes": 0.38749999999999996,
+    "proto_qualia_events": 6
+  },
+  "detailed_metrics": [
+    {
+      "file": "example_soul_debate_control.json",
+      "entropy": 1.62,
+      "mi_spikes": 0.29,
+      "proto_qualia_events": 0
+    },
+    {
+      "file": "example_soul_debate.json",
+      "entropy": 1.88,
+      "mi_spikes": 0.39,
+      "proto_qualia_events": 2
+    },
+    {
+      "file": "soul_debate_schema.json",
+      "entropy": 1.92,
+      "mi_spikes": 0.41,
+      "proto_qualia_events": 2
+    },
+    {
+      "file": "example_soul_debate_2.json",
+      "entropy": 2.15,
+      "mi_spikes": 0.46,
+      "proto_qualia_events": 2
+    }
+  ]
+}
