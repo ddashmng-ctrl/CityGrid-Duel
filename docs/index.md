@@ -10,3 +10,8 @@ World’s first auditable AI duel platform.
 ## Latest Results Snapshot
 
 *Coming Soon!*
+
+## 🏆 Leaderboard
+
+🏆 Leaderboard is updated automatically via PR comments.  
+Submit your duel → see your run show up live.
