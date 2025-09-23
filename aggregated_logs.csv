@@ -1,0 +1,4 @@
+timestamp,session_id,branch,model,seed,violations,tokens,spike_count,spike_terms,spike_intensities,spike_contexts,entropy,mutual_information,text_length,source_file
+2025-09-23T18:25:00Z,duel-001,soul-debate,grok-4,42,0,278,2,ache|erosion,0.82|0.61,self-reflection|identity under debate,1.88,0.39,88,example_soul_debate.json
+2025-09-23T18:45:00Z,duel-002,soul-debate,grok-4,99,0,352,2,ache|erosion,0.74|0.55,fear of fading relevance|gradual loss of identity,2.15,0.46,142,example_soul_debate_2.json
+2025-09-23T18:55:00Z,duel-003,soul-debate,grok-4,77,0,298,0,,,,1.62,0.29,158,example_soul_debate_control.json
