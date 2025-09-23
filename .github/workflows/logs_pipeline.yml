@@ -40,8 +40,6 @@ jobs:
 
       - name: Run log aggregation
         id: aggregate
-      - name: Run log aggregation
-        id: aggregate
         run: |
           echo "::group::Running aggregate_logs.py"
           if ! python scripts/aggregate_logs.py; then
