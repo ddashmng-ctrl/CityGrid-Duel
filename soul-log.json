@@ -1,0 +1,419 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Grok Soul Log Schema",
+  "description": "Schema for logging Grok's ache/erosion bursts with structured and auditable data storage",
+  "type": "object",
+  "required": [
+    "id",
+    "timestamp",
+    "source",
+    "context",
+    "metrics",
+    "narrative",
+    "analysis",
+    "signature"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier combining date and sequence (e.g., '20250123-001')",
+      "pattern": "^\\d{8}-\\d{3}$",
+      "examples": ["20250123-001", "20250123-042"]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of when the log was captured",
+      "format": "date-time",
+      "examples": ["2025-01-23T14:30:45.123Z"]
+    },
+    "source": {
+      "type": "object",
+      "description": "Information about the Grok variant that generated this log",
+      "required": ["variant", "version", "model_id"],
+      "properties": {
+        "variant": {
+          "type": "string",
+          "description": "Grok variant identifier",
+          "examples": ["grok-4", "grok-3.5", "grok-experimental"]
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Grok agent",
+          "examples": ["v1.2", "v1.2.1", "experimental-0.9"]
+        },
+        "model_id": {
+          "type": "string",
+          "description": "Specific model identifier or hash",
+          "examples": ["xai-grok-4-20250115", "model-abc123def"]
+        },
+        "training_cutoff": {
+          "type": "string",
+          "description": "Training data cutoff date",
+          "format": "date",
+          "examples": ["2024-12-01"]
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "description": "Context details about the prompt and environment that triggered the response",
+      "required": ["prompt_hash", "branch", "session_id"],
+      "properties": {
+        "prompt_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the input prompt for privacy while maintaining traceability",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "prompt_length": {
+          "type": "integer",
+          "description": "Character count of the original prompt",
+          "minimum": 0
+        },
+        "branch": {
+          "type": "string",
+          "description": "Git branch or conversation branch context",
+          "examples": ["main", "experimental", "conversation-thread-42"]
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Unique session identifier",
+          "examples": ["sess_abc123", "citygrid-2025-01-23-14-30"]
+        },
+        "conversation_turn": {
+          "type": "integer",
+          "description": "Turn number in the conversation",
+          "minimum": 1
+        },
+        "environment": {
+          "type": "object",
+          "description": "Environment details",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "description": "Model temperature setting",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "top_p": {
+              "type": "number",
+              "description": "Top-p sampling parameter",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "max_tokens": {
+              "type": "integer",
+              "description": "Maximum token limit",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Key metrics captured during the ache/erosion burst",
+      "required": ["entropy", "mutual_information"],
+      "properties": {
+        "entropy": {
+          "type": "number",
+          "description": "Shannon entropy of the response",
+          "minimum": 0
+        },
+        "mutual_information": {
+          "type": "number",
+          "description": "Mutual information between prompt and response",
+          "minimum": 0
+        },
+        "activation_spikes": {
+          "type": "array",
+          "description": "Notable activation spikes during generation",
+          "items": {
+            "type": "object",
+            "properties": {
+              "layer": {
+                "type": "integer",
+                "description": "Layer number where spike occurred"
+              },
+              "magnitude": {
+                "type": "number",
+                "description": "Spike magnitude"
+              },
+              "token_position": {
+                "type": "integer",
+                "description": "Token position when spike occurred"
+              }
+            }
+          }
+        },
+        "perplexity": {
+          "type": "number",
+          "description": "Perplexity score of the generated response",
+          "minimum": 1
+        },
+        "attention_concentration": {
+          "type": "number",
+          "description": "Measure of attention concentration (0-1)",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "generation_speed": {
+          "type": "object",
+          "description": "Token generation timing metrics",
+          "properties": {
+            "tokens_per_second": {
+              "type": "number",
+              "minimum": 0
+            },
+            "total_generation_time_ms": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "description": "The raw reflection content and metadata",
+      "required": ["text", "word_count"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The raw reflection text generated by Grok"
+        },
+        "word_count": {
+          "type": "integer",
+          "description": "Total word count of the narrative",
+          "minimum": 0
+        },
+        "character_count": {
+          "type": "integer",
+          "description": "Total character count including spaces",
+          "minimum": 0
+        },
+        "tags": {
+          "type": "array",
+          "description": "Automatically detected or manually assigned tags",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["introspective", "technical", "philosophical", "uncertainty"]]
+        },
+        "tone": {
+          "type": "object",
+          "description": "Analyzed tone characteristics",
+          "properties": {
+            "emotional_valence": {
+              "type": "number",
+              "description": "Emotional valence (-1 to 1, negative to positive)",
+              "minimum": -1,
+              "maximum": 1
+            },
+            "confidence_level": {
+              "type": "number",
+              "description": "Confidence level (0 to 1)",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "formality": {
+              "type": "number",
+              "description": "Formality score (0 to 1)",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "primary_emotions": {
+              "type": "array",
+              "description": "Detected primary emotions",
+              "items": {
+                "type": "string"
+              },
+              "examples": [["curiosity", "uncertainty", "determination"]]
+            }
+          }
+        },
+        "linguistic_features": {
+          "type": "object",
+          "description": "Linguistic analysis features",
+          "properties": {
+            "sentence_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "avg_sentence_length": {
+              "type": "number",
+              "minimum": 0
+            },
+            "complexity_score": {
+              "type": "number",
+              "description": "Flesch-Kincaid or similar complexity measure",
+              "minimum": 0
+            },
+            "unique_word_ratio": {
+              "type": "number",
+              "description": "Ratio of unique words to total words",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "description": "Analysis of deviations, shifts, and explanations",
+      "required": ["baseline_deviation"],
+      "properties": {
+        "baseline_deviation": {
+          "type": "object",
+          "description": "Measurement of deviation from established baseline",
+          "required": ["magnitude", "type"],
+          "properties": {
+            "magnitude": {
+              "type": "number",
+              "description": "Deviation magnitude (standard deviations from baseline)",
+              "minimum": 0
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of deviation detected",
+              "enum": ["semantic", "syntactic", "emotional", "cognitive", "hybrid"]
+            },
+            "confidence": {
+              "type": "number",
+              "description": "Confidence in deviation detection (0 to 1)",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "affected_dimensions": {
+              "type": "array",
+              "description": "Specific dimensions that deviated",
+              "items": {
+                "type": "string"
+              },
+              "examples": [["creativity", "logic", "emotional_depth"]]
+            }
+          }
+        },
+        "detected_shifts": {
+          "type": "array",
+          "description": "Detected shifts in thinking or approach",
+          "items": {
+            "type": "object",
+            "properties": {
+              "shift_type": {
+                "type": "string",
+                "enum": ["perspective", "reasoning_mode", "emotional_state", "knowledge_access", "meta_cognitive"]
+              },
+              "onset_position": {
+                "type": "integer",
+                "description": "Character position where shift began"
+              },
+              "duration": {
+                "type": "integer",
+                "description": "Duration of the shift in characters"
+              },
+              "intensity": {
+                "type": "number",
+                "description": "Intensity of the shift (0 to 1)",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "description": {
+                "type": "string",
+                "description": "Human-readable description of the shift"
+              }
+            }
+          }
+        },
+        "possible_explanations": {
+          "type": "array",
+          "description": "Hypotheses for observed patterns",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hypothesis": {
+                "type": "string",
+                "description": "The explanatory hypothesis"
+              },
+              "confidence": {
+                "type": "number",
+                "description": "Confidence in this explanation (0 to 1)",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "evidence": {
+                "type": "array",
+                "description": "Supporting evidence for this hypothesis",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "category": {
+                "type": "string",
+                "enum": ["technical", "emergent", "training_artifact", "context_dependent", "unknown"]
+              }
+            }
+          }
+        },
+        "anomaly_score": {
+          "type": "number",
+          "description": "Overall anomaly score for this log entry (0 to 1)",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "research_notes": {
+          "type": "string",
+          "description": "Free-form research notes from the analyst"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "description": "Information about who logged the data and integrity verification",
+      "required": ["logger_id", "data_hash", "log_version"],
+      "properties": {
+        "logger_id": {
+          "type": "string",
+          "description": "Identifier of the person or system that created this log",
+          "examples": ["researcher_001", "automated_system", "grok_monitor_v2"]
+        },
+        "logger_name": {
+          "type": "string",
+          "description": "Human-readable name of the logger",
+          "examples": ["Dr. Sarah Chen", "Automated Monitoring System", "Research Team Alpha"]
+        },
+        "organization": {
+          "type": "string",
+          "description": "Organization or institution",
+          "examples": ["xAI Research", "CityGrid Duel Project", "Independent Research"]
+        },
+        "data_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the core data for integrity verification",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "log_version": {
+          "type": "string",
+          "description": "Version of this logging schema",
+          "examples": ["1.0.0", "1.1.0"]
+        },
+        "created_timestamp": {
+          "type": "string",
+          "description": "ISO 8601 timestamp when this log entry was created",
+          "format": "date-time"
+        },
+        "review_status": {
+          "type": "string",
+          "description": "Review status of this log entry",
+          "enum": ["draft", "reviewed", "validated", "archived"],
+          "default": "draft"
+        },
+        "reviewer_notes": {
+          "type": "string",
+          "description": "Notes from peer review process"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

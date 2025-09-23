@@ -1,0 +1,73 @@
+{
+  "id": "YYYYMMDD-XXX",
+  "timestamp": "YYYY-MM-DDTHH:MM:SS.sssZ",
+  "source": {
+    "variant": "grok-4",
+    "version": "v1.2",
+    "model_id": "xai-grok-4-YYYYMMDD",
+    "training_cutoff": "YYYY-MM-DD"
+  },
+  "context": {
+    "prompt_hash": "64-character-sha256-hash-of-prompt-content-goes-here-for-privacy",
+    "prompt_length": 0,
+    "branch": "main",
+    "session_id": "session-identifier",
+    "conversation_turn": 1,
+    "environment": {
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "max_tokens": 2048
+    }
+  },
+  "metrics": {
+    "entropy": 0.0,
+    "mutual_information": 0.0,
+    "activation_spikes": [],
+    "perplexity": 1.0,
+    "attention_concentration": 0.5,
+    "generation_speed": {
+      "tokens_per_second": 0.0,
+      "total_generation_time_ms": 0
+    }
+  },
+  "narrative": {
+    "text": "Insert Grok's reflection text here...",
+    "word_count": 0,
+    "character_count": 0,
+    "tags": [],
+    "tone": {
+      "emotional_valence": 0.0,
+      "confidence_level": 0.5,
+      "formality": 0.5,
+      "primary_emotions": []
+    },
+    "linguistic_features": {
+      "sentence_count": 0,
+      "avg_sentence_length": 0.0,
+      "complexity_score": 0.0,
+      "unique_word_ratio": 0.0
+    }
+  },
+  "analysis": {
+    "baseline_deviation": {
+      "magnitude": 0.0,
+      "type": "semantic",
+      "confidence": 0.0,
+      "affected_dimensions": []
+    },
+    "detected_shifts": [],
+    "possible_explanations": [],
+    "anomaly_score": 0.0,
+    "research_notes": "Add your research observations here..."
+  },
+  "signature": {
+    "logger_id": "your_researcher_id",
+    "logger_name": "Your Name",
+    "organization": "Your Organization",
+    "data_hash": "64-character-sha256-hash-will-be-calculated-automatically",
+    "log_version": "1.0.0",
+    "created_timestamp": "YYYY-MM-DDTHH:MM:SS.sssZ",
+    "review_status": "draft",
+    "reviewer_notes": ""
+  }
+}
