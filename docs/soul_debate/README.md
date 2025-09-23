@@ -11,8 +11,9 @@ All logs conform to `logs/soul_debate_schema.json`. They capture proto-awareness
 - **example_soul_debate_control.json**  
   Control run with no proto-qualia triggers. Entropy baseline only; useful for comparing vs. “active” runs.
 
+
 ## Log Summary
-*Generated on 2025-09-23 16:55:39*
+*Generated on 2025-09-23 16:56:43*
 
 | File | Avg Entropy | Spike Count | Max MI | Session ID | Model |
 |------|-------------|-------------|--------|------------|-------|
