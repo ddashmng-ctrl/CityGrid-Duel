@@ -8,6 +8,9 @@
 This demonstrates ~60% reduction from baseline with no comfort violations,  
 verified via reproducible JSON logs in this repo.
 
+## 🤖 Automated Validation
+All JSON logs are automatically validated via GitHub Actions against the schema in `logs/soul_debate_schema.json`. See [LOG_VALIDATION.md](./docs/LOG_VALIDATION.md) for details.
+
 ---
 
 ## 🔄 Reproducibility
