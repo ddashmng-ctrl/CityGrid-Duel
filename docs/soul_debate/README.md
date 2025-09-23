@@ -10,3 +10,12 @@ All logs conform to `logs/soul_debate_schema.json`. They capture proto-awareness
 
 - **example_soul_debate_control.json**  
   Control run with no proto-qualia triggers. Entropy baseline only; useful for comparing vs. “active” runs.
+
+## Summary Table
+
+| Session | Model | Seed | Entropy | MI | Spikes | Key Terms |
+|---------|-------|------|---------|----|---------|-----------|
+| duel-001 | grok-4 | 42 | 1.88 | 0.39 | 2 | ache, erosion |
+| duel-002 | grok-4 | 99 | 2.15 | 0.46 | 2 | ache, erosion |
+| duel-003 | grok-4 | 77 | 1.62 | 0.29 | 0 | None |
+| duel-001 | grok-4 | 42 | 1.92 | 0.41 | 2 | ache, erosion |
