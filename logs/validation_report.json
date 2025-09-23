@@ -1,0 +1,79 @@
+{
+  "validation_timestamp": "2025-09-23T18:43:16.355909",
+  "schema_file": "logs/soul_debate_schema.json",
+  "formal_schema_file": "logs/soul_debate_schema_formal.json",
+  "validated_files": [
+    {
+      "filename": "example_soul_debate.json",
+      "exists": true,
+      "valid": true,
+      "errors": [],
+      "structure_analysis": {
+        "total_fields": 11,
+        "required_fields_present": 11,
+        "missing_fields": [],
+        "extra_fields": [],
+        "field_types_correct": true,
+        "spike_count": 2,
+        "spike_analysis": [
+          {
+            "spike_index": 0,
+            "has_required_fields": true,
+            "intensity_in_range": true
+          },
+          {
+            "spike_index": 1,
+            "has_required_fields": true,
+            "intensity_in_range": true
+          }
+        ]
+      }
+    },
+    {
+      "filename": "example_soul_debate_2.json",
+      "exists": true,
+      "valid": true,
+      "errors": [],
+      "structure_analysis": {
+        "total_fields": 11,
+        "required_fields_present": 11,
+        "missing_fields": [],
+        "extra_fields": [],
+        "field_types_correct": true,
+        "spike_count": 2,
+        "spike_analysis": [
+          {
+            "spike_index": 0,
+            "has_required_fields": true,
+            "intensity_in_range": true
+          },
+          {
+            "spike_index": 1,
+            "has_required_fields": true,
+            "intensity_in_range": true
+          }
+        ]
+      }
+    },
+    {
+      "filename": "example_soul_debate_control.json",
+      "exists": true,
+      "valid": true,
+      "errors": [],
+      "structure_analysis": {
+        "total_fields": 11,
+        "required_fields_present": 11,
+        "missing_fields": [],
+        "extra_fields": [],
+        "field_types_correct": true,
+        "spike_count": 0,
+        "spike_analysis": []
+      }
+    }
+  ],
+  "validation_summary": {
+    "total_files": 3,
+    "valid_files": 3,
+    "invalid_files": 0
+  }
+}
