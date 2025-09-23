@@ -1,0 +1,47 @@
+{
+  "timestamp": "1758662541.3220396",
+  "summary": {
+    "total_data_points": 7,
+    "soul_debate_sessions": 4,
+    "simulation_runs": 3
+  },
+  "soul_debate_analysis": {
+    "total_sessions": 4,
+    "entropy_stats": {
+      "mean": 1.4125,
+      "median": 1.75,
+      "max": 2.15,
+      "min": 0.0
+    },
+    "mutual_information_stats": {
+      "mean": 0.28500000000000003,
+      "median": 0.33999999999999997,
+      "max": 0.46,
+      "min": 0.0
+    },
+    "spike_analysis": {
+      "total_spikes": 4,
+      "avg_spikes_per_session": 1,
+      "max_spikes_session": 2,
+      "max_spike_intensity": 0.82
+    }
+  },
+  "simulation_analysis": {
+    "total_simulations": 3,
+    "grid_draw_stats": {
+      "mean": 0.5933333333333333,
+      "median": 0.42,
+      "best": 0.4,
+      "worst": 0.96
+    },
+    "violation_stats": {
+      "total_violations": 0,
+      "simulations_with_violations": 0,
+      "max_violations": 0
+    },
+    "duration_stats": {
+      "total_hours": 216.0,
+      "avg_hours": 72.0
+    }
+  }
+}
