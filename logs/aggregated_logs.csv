@@ -1,0 +1,4 @@
+run_id,session_id,timestamp,entropy,mutual_information,tokens,seed
+1,duel-001,2025-09-23T18:25:00Z,1.88,0.39,278,42
+2,duel-001,2025-09-23T17:45:00Z,1.92,0.41,312,42
+3,duel-003,2025-09-23T18:55:00Z,1.62,0.29,298,77
