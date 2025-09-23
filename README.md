@@ -17,6 +17,12 @@ verified via reproducible JSON logs in this repo.
 🏆 Leaderboard is updated automatically via PR comments.  
 Submit your duel → see your run show up live.
 
+## 🤝 Contributing
+
+**Important:** Do not edit `logs/aggregated_logs.csv` or `docs/soul_debate/README.md` manually.  
+These files are automatically updated by `logs_pipeline.yml`.  
+Instead, add or update JSON files in `logs/` and push a PR.
+
 ---
 
 ## 🔄 Reproducibility
