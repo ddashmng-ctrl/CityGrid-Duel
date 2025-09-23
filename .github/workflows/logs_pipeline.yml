@@ -1,0 +1,154 @@
+name: Soul Debate Logs Pipeline
+
+on:
+  push:
+    paths:
+      - 'logs/*.json'
+      - 'scripts/aggregate_logs.py'
+      - 'scripts/summarize_logs.py'
+      - 'logs/soul_debate_schema.json'
+      - '.github/workflows/logs_pipeline.yml'
+  pull_request:
+    paths:
+      - 'logs/*.json'
+      - 'scripts/aggregate_logs.py'
+      - 'scripts/summarize_logs.py'
+      - 'logs/soul_debate_schema.json'
+      - '.github/workflows/logs_pipeline.yml'
+  workflow_dispatch:
+
+jobs:
+  validate-and-process-logs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt.
+          pip install jsonschema
+          
+      - name: Validate JSON files against schema
+        run: |
+          echo "Validating JSON files in logs directory..."
+          python -c "
+          import json
+          import jsonschema
+          import sys
+          from pathlib import Path
+          
+          # Load schema
+          schema_path = Path('logs/soul_debate_schema.json')
+          if not schema_path.exists():
+              print('Error: Schema file not found')
+              sys.exit(1)
+          
+          with open(schema_path) as f:
+              schema = json.load(f)
+          
+          # Validate all JSON files except schema
+          logs_dir = Path('logs')
+          errors = []
+          validated_files = []
+          
+          for json_file in logs_dir.glob('*.json'):
+              if json_file.name == 'soul_debate_schema.json':
+                  continue
+                  
+              try:
+                  with open(json_file) as f:
+                      data = json.load(f)
+                  
+                  jsonschema.validate(data, schema)
+                  validated_files.append(json_file.name)
+                  print(f'✓ {json_file.name} is valid')
+                  
+              except jsonschema.ValidationError as e:
+                  error_msg = f'❌ {json_file.name}: {e.message}'
+                  errors.append(error_msg)
+                  print(error_msg)
+                  
+              except json.JSONDecodeError as e:
+                  error_msg = f'❌ {json_file.name}: Invalid JSON - {e}'
+                  errors.append(error_msg)
+                  print(error_msg)
+                  
+              except Exception as e:
+                  error_msg = f'❌ {json_file.name}: {e}'
+                  errors.append(error_msg)
+                  print(error_msg)
+          
+          if errors:
+              print(f'\nValidation failed for {len(errors)} files:')
+              for error in errors:
+                  print(error)
+              sys.exit(1)
+          else:
+              print(f'\n✅ All {len(validated_files)} JSON files are valid!')
+          "
+          
+      - name: Run aggregate logs script
+        run: |
+          echo "Running aggregate_logs.py..."
+          python scripts/aggregate_logs.py
+          
+      - name: Run summarize logs script  
+        run: |
+          echo "Running summarize_logs.py..."
+          python scripts/summarize_logs.py
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git diff --name-only
+          fi
+          
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true' && github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add logs/aggregated_logs.csv docs/soul_debate/README.md
+          git commit -m "Auto-update logs aggregation and documentation [skip ci]" || exit 0
+          git push
+          
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-logs
+          path: |
+            logs/aggregated_logs.csv
+            docs/soul_debate/README.md
+          retention-days: 30
+          
+      - name: Job summary
+        run: |
+          echo "## Soul Debate Logs Pipeline Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Validation" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All JSON files validated successfully against schema" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Processing" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Logs aggregated to \`logs/aggregated_logs.csv\`" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Documentation updated at \`docs/soul_debate/README.md\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "logs/aggregated_logs.csv" ]; then
+            echo "### Aggregated Data Preview" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            head -n 5 logs/aggregated_logs.csv >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
