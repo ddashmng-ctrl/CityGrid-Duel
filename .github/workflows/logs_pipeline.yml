@@ -1,0 +1,80 @@
+name: Soul Debate Logs Pipeline
+
+on:
+  push:
+    paths:
+      - 'logs/**/*.json'
+      - 'scripts/aggregate_logs.py'
+      - 'scripts/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  process-logs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Make scripts executable
+        run: |
+          chmod +x scripts/aggregate_logs.py
+          chmod +x scripts/summarize_logs.py
+          
+      - name: Run log aggregation
+        run: |
+          echo "Running log aggregation..."
+          python scripts/aggregate_logs.py
+          
+      - name: Run log summarization and update README
+        run: |
+          echo "Running log summarization and updating README..."
+          python scripts/summarize_logs.py --quiet
+          
+      - name: Check for README changes
+        id: check_changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Check if there are any changes to commit
+          git add docs/soul_debate/README.md
+          
+          if git diff --cached --quiet; then
+            echo "No changes detected in README.md"
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected in README.md"
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes_detected == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add docs/soul_debate/README.md
+          git commit -m "Auto-update: Refresh Current Metrics from aggregated logs
+          
+          - Updated metrics section in docs/soul_debate/README.md
+          - Generated from aggregated soul debate logs
+          - Workflow run: ${{ github.run_id }}"
+          
+          git push
+          
+      - name: Log completion
+        run: |
+          if [ "${{ steps.check_changes.outputs.changes_detected }}" == "true" ]; then
+            echo "✅ Pipeline completed successfully - README.md updated and committed"
+          else
+            echo "✅ Pipeline completed successfully - No changes to commit"
+          fi
