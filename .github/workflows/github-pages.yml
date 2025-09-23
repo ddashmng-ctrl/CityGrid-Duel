@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main  # publish whenever you push to main
+    paths:
+      - 'README.md'
+      - 'docs/**'
+      - '.github/workflows/github-pages.yml'
 
 permissions:
   contents: read
@@ -16,6 +20,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Build docs directory
+        run: |
+          # Copy README.md content to docs/index.md
+          cp README.md docs/index.md
+          # Ensure docs directory exists and has proper structure
+          ls -la docs/
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
