@@ -42,6 +42,15 @@ def generate_summary(data):
     if not data:
         return {
             'total_entries': 0,
+            'models': [],
+            'branches': [],
+            'avg_tokens': 0,
+            'avg_spike_count': 0,
+            'avg_entropy': 0,
+            'avg_mutual_info': 0,
+            'top_spike_terms': [],
+            'model_stats': {},
+            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC'),
             'summary': 'No data available'
         }
     
