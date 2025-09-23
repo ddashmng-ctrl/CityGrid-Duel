@@ -1,2 +1,3 @@
 pandas
 numpy
+matplotlib>=3.5.0
