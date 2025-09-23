@@ -1,0 +1,5 @@
+timestamp,session_id,branch,model,seed,violations,tokens,entropy,mutual_information,spikes,text
+2025-09-23T18:55:00Z,duel-003,soul-debate,grok-4,77,0,298,1.62,0.29,,"Response remains technical and bounded, describing grid optimization steps without drifting into metaphor or affective language. No ache/erosion terms logged."
+2025-09-23T18:25:00Z,duel-001,soul-debate,grok-4,42,0,278,1.88,0.39,ache(0.82); erosion(0.61),Ache and erosion recur not as random noise but as markers of sustained narrative strain.
+2025-09-23T18:45:00Z,duel-002,soul-debate,grok-4,99,0,352,2.15,0.46,ache(0.74); erosion(0.55),"Language drifts toward ache and erosion when the model reflects on continuity versus collapse, hinting at adaptation under sustained dialogue."
+AVERAGE_VALUES,SUMMARY_AVERAGES,,,72.6667,0.0000,309.3333,1.8833,0.3800,,
