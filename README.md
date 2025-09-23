@@ -11,6 +11,11 @@
 This demonstrates ~60% reduction from baseline with no comfort violations,  
 verified via reproducible JSON logs in this repo.
 
+## 🏆 Leaderboard
+
+🏆 Leaderboard is updated automatically via PR comments.  
+Submit your duel → see your run show up live.
+
 ---
 
 ## 🔄 Reproducibility
