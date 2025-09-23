@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main  # publish whenever you push to main
+    paths-ignore:
+      - 'README.md'  # Let sync-leaderboard.yml handle README.md changes
+  workflow_run:
+    workflows: ["Sync Leaderboard to GitHub Pages"]
+    types: [completed]
 
 permissions:
   contents: read
