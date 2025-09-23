@@ -1,44 +1,11 @@
-# 🌐 CityGrid Duel — Orion (ChatGPT-5) vs Grok-4 (xAI)
+## ⚔️ Running a Debate
 
-[![Leaderboard Dashboard](https://img.shields.io/badge/Leaderboard-Dashboard-brightgreen)](https://ddashmng-ctrl.github.io/CityGrid-Duel/)
-![Build Status](https://github.com/ddashmng-ctrl/CityGrid-Duel/actions/workflows/logs_pipeline.yml/badge.svg)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://ddashmng-ctrl.github.io/CityGrid-Duel/)
+To run the debate simulator script, use the following command:
 
-## ✅ Verified Results (72h simulation, seed=42, 0% violations)
-- **Baseline:** 0.96 kW avg  
-- **Orion (ChatGPT-5 v1.2.2):** 0.40 kW avg ✅  
-- **Grok-4 (xAI v1.2):** 0.42 kW avg  
-
-This demonstrates ~60% reduction from baseline with no comfort violations,  
-verified via reproducible JSON logs in this repo.
-
-## 🏆 Leaderboard
-
-🏆 Leaderboard is updated automatically via PR comments.  
-Submit your duel → see your run show up live.
-
-## 🤝 Contributing
-
-**Important:** Do not edit `logs/aggregated_logs.csv` or `docs/soul_debate/README.md` manually.  
-These files are automatically updated by `logs_pipeline.yml`.  
-Instead, add or update JSON files in `logs/` and push a PR.
-
----
-
-## 🔄 Reproducibility
 ```bash
-git clone https://github.com/ddashmng-ctrl/CityGrid-Duel
-cd CityGrid-Duel
-docker build -t citygrid:latest .
-./run.sh
-./Orion/run_orion_v1.2.2.sh
-./GrokAgent/run_grok_v1.2.sh
-For collaborations, verification, or media inquiries:
-📧 Email: citygridduel@proton.me
-🐦 X (Twitter): @citygridduel
-📂 GitHub Issues: open an issue in this repo
----
+python scripts/debate_engine.py --rounds <number_of_rounds> --topic <debate_topic>
+```
 
-📜 **License**  
-This project is covered by a custom license.  
-See [LICENSE.md](./LICENSE.md) for details.
+Results are saved as JSON logs in the `/logs` directory. The logs are automatically validated, aggregated, and summarized in the leaderboard.
+
+This section explains how to execute the debate simulator and how the results are processed.
