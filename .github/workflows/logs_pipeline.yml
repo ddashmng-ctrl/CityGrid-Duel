@@ -8,6 +8,9 @@ on:
     paths:
       - 'logs/*.json'
 
+permissions:
+  contents: read
+
 jobs:
   logs-pipeline:
     runs-on: ubuntu-latest
@@ -48,3 +51,4 @@ jobs:
             logs/aggregated_logs.csv
             docs/soul_debate/README.md
           retention-days: 30
+          if-no-files-found: error

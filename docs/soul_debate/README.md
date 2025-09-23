@@ -2,7 +2,7 @@
 
 All logs conform to `logs/soul_debate_schema.json`. They capture proto-awareness signals (entropy, MI, spikes).
 
-#### Current Statistics (Last Updated: 2025-09-23T21:16:43.634198)
+#### Current Statistics (Last Updated: 2025-09-23T21:19:03.775182)
 - **Total Log Entries:** 6
 - **Soul Debate Logs:** 3
 - **Simulation Results:** 3
