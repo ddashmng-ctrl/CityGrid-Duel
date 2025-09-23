@@ -1,0 +1,54 @@
+name: Logs Pipeline
+
+on:
+  push:
+    paths:
+      - 'logs/*.json'
+  pull_request:
+    paths:
+      - 'logs/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  logs-pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt. ]; then
+            pip install -r requirements.txt.
+          fi
+          # Install additional dependencies needed by scripts
+          pip install pandas numpy
+      
+      - name: Validation
+        run: python tools/verify_results.py
+        continue-on-error: true
+      
+      - name: Log Aggregation
+        run: python scripts/aggregate_logs.py
+      
+      - name: Log Summarization
+        run: python scripts/summarize_logs.py
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-pipeline-artifacts
+          path: |
+            logs/aggregated_logs.csv
+            docs/soul_debate/README.md
+          retention-days: 30
+          if-no-files-found: error
