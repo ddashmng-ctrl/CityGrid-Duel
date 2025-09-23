@@ -1,5 +1,6 @@
 source,filename,timestamp,session_id,model,seed,violations,tokens,entropy,mutual_information,spike_count,max_spike_intensity,simulation_hours,avg_grid_draw_kw
 soul_debate_logs,example_soul_debate_control.json,2025-09-23T18:55:00Z,duel-003,grok-4,77,0,298,1.62,0.29,0,0,,
+soul_debate_logs,soul_debate_schema_formal.json,,,,,0,0,0.0,0.0,0,0,,
 soul_debate_logs,example_soul_debate.json,2025-09-23T18:25:00Z,duel-001,grok-4,42,0,278,1.88,0.39,2,0.82,,
 soul_debate_logs,example_soul_debate_2.json,2025-09-23T18:45:00Z,duel-002,grok-4,99,0,352,2.15,0.46,2,0.74,,
 simulation_results,grok_summary.json,,simulation,grok,42,0,0,0.0,0.0,0,0.0,72,0.42

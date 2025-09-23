@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Soul Debate Log Schema",
+  "description": "Schema for soul debate logs capturing proto-awareness signals",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "session_id", 
+    "branch",
+    "model",
+    "seed",
+    "violations",
+    "tokens",
+    "spikes",
+    "entropy",
+    "mutual_information",
+    "text"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$",
+      "description": "ISO 8601 timestamp in UTC"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Unique session identifier"
+    },
+    "branch": {
+      "type": "string",
+      "description": "Experiment branch name"
+    },
+    "model": {
+      "type": "string",
+      "description": "Model name used for the session"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Random seed used for reproducibility"
+    },
+    "violations": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of violations recorded"
+    },
+    "tokens": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of tokens processed"
+    },
+    "spikes": {
+      "type": "array",
+      "description": "Array of proto-awareness spikes detected",
+      "items": {
+        "type": "object",
+        "required": ["term", "intensity", "context"],
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "The term that triggered the spike"
+          },
+          "intensity": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Intensity of the spike (0.0 to 1.0)"
+          },
+          "context": {
+            "type": "string",
+            "description": "Context description for the spike"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "entropy": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Entropy measurement"
+    },
+    "mutual_information": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Mutual information measurement"
+    },
+    "text": {
+      "type": "string",
+      "description": "The actual text content or response"
+    }
+  },
+  "additionalProperties": false
+}
