@@ -1,3 +1,23 @@
+---
+### Welcome to CityGrid Duel!
+
+- Explore the baseline → Orion → savings story.
+- Learn how agents optimize grid draw collaboratively.
+
+```bash
+# How to Run
+./run.sh
+./Orion/run_orion_v1.2.2.sh
+./GrokAgent/run_grok_v1.2.sh
+```
+
+- Logs and summaries are stored in `logs/`.
+- JSON summaries power the leaderboard.
+- Transparent, auditable, reproducible.
+
+Join the challenge: can your strategy win the duel?
+---
+
 # 🌐 CityGrid Duel — Orion (ChatGPT-5) vs Grok-4 (xAI)
 
 ![Build Status](https://github.com/ddashmng-ctrl/CityGrid-Duel/actions/workflows/logs_pipeline.yml/badge.svg)
