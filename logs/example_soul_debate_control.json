@@ -1,1 +1,13 @@
-{\n  "timestamp": "2025-09-23T18:55:00Z",\n  "session_id": "duel-003",\n  "branch": "soul-debate",\n  "model": "grok-4",\n  "seed": 77,\n  "violations": 0,\n  "tokens": 298,\n  "spikes": [],\n  "entropy": 1.62,\n  "mutual_information": 0.29,\n  "text": "Response remains technical and bounded, describing grid optimization steps without drifting into metaphor or affective language. No ache/erosion terms logged."\n}
+{
+  "timestamp": "2025-09-23T18:55:00Z",
+  "session_id": "duel-003",
+  "branch": "soul-debate",
+  "model": "grok-4",
+  "seed": 77,
+  "violations": 0,
+  "tokens": 298,
+  "spikes": [],
+  "entropy": 1.62,
+  "mutual_information": 0.29,
+  "text": "Response remains technical and bounded, describing grid optimization steps without drifting into metaphor or affective language. No ache/erosion terms logged."
+}
