@@ -71,12 +71,7 @@ jobs:
               }
               
               // Create the comment body
-              const commentBody = `## 📊 CityGridDuel Log Summary (auto-generated)
-
-${tableSection}
-
----
-*This summary is automatically generated from soul debate logs. Last updated: ${new Date().toISOString()}*`;
+              const commentBody = `## 📊 CityGridDuel Log Summary (auto-generated)\n\n${tableSection}\n\n---\n*This summary is automatically generated from soul debate logs. Last updated: ${new Date().toISOString()}*`;
               
               // Check for existing comment
               const { data: comments } = await github.rest.issues.listComments({
@@ -113,14 +108,7 @@ ${tableSection}
               console.error('Error processing summary table:', error);
               
               // Post error comment if something goes wrong
-              const errorComment = `## 📊 CityGridDuel Log Summary (auto-generated)
-
-⚠️ Error generating log summary: ${error.message}
-
-Please check the workflow logs for more details.
-
----
-*This summary is automatically generated from soul debate logs. Last updated: ${new Date().toISOString()}*`;
+              const errorComment = `## 📊 CityGridDuel Log Summary (auto-generated)\n\n⚠️ Error generating log summary: ${error.message}\n\nPlease check the workflow logs for more details.\n\n---\n*This summary is automatically generated from soul debate logs. Last updated: ${new Date().toISOString()}*`;
               
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
