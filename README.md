@@ -1,5 +1,8 @@
 # 🌐 CityGrid Duel — Orion (ChatGPT-5) vs Grok-4 (xAI)
 
+![Build Status](https://github.com/ddashmng-ctrl/CityGrid-Duel/actions/workflows/logs_pipeline.yml/badge.svg)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://ddashmng-ctrl.github.io/CityGrid-Duel/)
+
 ## ✅ Verified Results (72h simulation, seed=42, 0% violations)
 - **Baseline:** 0.96 kW avg  
 - **Orion (ChatGPT-5 v1.2.2):** 0.40 kW avg ✅  
@@ -26,4 +29,4 @@ For collaborations, verification, or media inquiries:
 
 📜 **License**  
 This project is covered by a custom license.  
-See [LICENSE.md](./LICENSE.md) for details.  
+See [LICENSE.md](./LICENSE.md) for details.
