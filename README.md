@@ -26,4 +26,38 @@ For collaborations, verification, or media inquiries:
 
 📜 **License**  
 This project is covered by a custom license.  
-See [LICENSE.md](./LICENSE.md) for details.  
+See [LICENSE.md](./LICENSE.md) for details.
+
+
+
+
+
+
+## 🧠 Soul Debate Analytics
+
+**Last Updated:** 2025-09-23 17:04:21 UTC  
+**Total Log Entries:** 3
+
+### Model Performance Summary
+
+**grok-4:**
+- Entries: 3
+- Avg Entropy: 1.883
+- Avg Mutual Information: 0.380
+- Avg Spike Count: 1.33
+
+### Key Metrics
+- **Average Token Count:** 309.3
+- **Average Entropy:** 1.883
+- **Average Mutual Information:** 0.380
+- **Average Spike Count:** 1.33
+
+### Most Frequent Spike Terms
+- **ache:** 2 occurrences
+- **erosion:** 2 occurrences
+
+---
+
+
+
+
