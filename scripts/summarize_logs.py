@@ -159,17 +159,23 @@ def main():
     """Main function to orchestrate the log analysis and README update."""
     print("Starting log analysis...")
     
-    # Load and analyze logs
-    log_files = load_log_files()
-    print(f"Found {len(log_files)} log files to analyze")
-    
-    analysis = analyze_logs(log_files)
-    print(f"Analysis complete: {analysis['total_files']} files, {analysis['total_spikes']} spikes")
-    
-    # Update README
-    update_readme(analysis)
-    
-    print("Log summarization complete!")
+    try:
+        # Load and analyze logs
+        log_files = load_log_files()
+        print(f"Found {len(log_files)} log files to analyze")
+        
+        analysis = analyze_logs(log_files)
+        print(f"Analysis complete: {analysis['total_files']} files, {analysis['total_spikes']} spikes")
+        
+        # Update README
+        update_readme(analysis)
+        
+        print("Log summarization complete!")
+        return 0
+        
+    except Exception as e:
+        print(f"Error during log analysis: {e}")
+        return 1
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
