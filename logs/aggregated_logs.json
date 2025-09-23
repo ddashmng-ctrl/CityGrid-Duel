@@ -1,0 +1,39 @@
+{
+  "timestamp": "2024-09-23T17:00:00Z",
+  "total_files_processed": 3,
+  "files": [
+    {
+      "filename": "grok_summary.json",
+      "path": "output/grok_summary.json",
+      "size_bytes": 111,
+      "summary": {
+        "simulation_duration_hours": 72,
+        "average_grid_draw_kw": 0.42,
+        "comfort_violations": 0,
+        "seed": 42
+      }
+    },
+    {
+      "filename": "baseline_summary.json",
+      "path": "output/baseline_summary.json",
+      "size_bytes": 110,
+      "summary": {
+        "simulation_duration_hours": 72,
+        "average_grid_draw_kw": 0.96,
+        "comfort_violations": 0,
+        "seed": 42
+      }
+    },
+    {
+      "filename": "orion_v1.2.2_summary.json",
+      "path": "output/orion_v1.2.2_summary.json",
+      "size_bytes": 111,
+      "summary": {
+        "simulation_duration_hours": 72,
+        "average_grid_draw_kw": 0.4,
+        "comfort_violations": 0,
+        "seed": 42
+      }
+    }
+  ]
+}

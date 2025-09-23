@@ -1,0 +1,19 @@
+{
+  "last_updated": "2025-09-23T17:16:48.501130",
+  "total_log_files": 3,
+  "total_size_bytes": 332,
+  "files_summary": [
+    {
+      "name": "grok_summary.json",
+      "size": 111
+    },
+    {
+      "name": "baseline_summary.json",
+      "size": 110
+    },
+    {
+      "name": "orion_v1.2.2_summary.json",
+      "size": 111
+    }
+  ]
+}
