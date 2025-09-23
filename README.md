@@ -1,5 +1,6 @@
 # 🌐 CityGrid Duel — Orion (ChatGPT-5) vs Grok-4 (xAI)
 
+[![Leaderboard Dashboard](https://img.shields.io/badge/Leaderboard-Dashboard-brightgreen)](https://ddashmng-ctrl.github.io/CityGrid-Duel/)
 ![Build Status](https://github.com/ddashmng-ctrl/CityGrid-Duel/actions/workflows/logs_pipeline.yml/badge.svg)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://ddashmng-ctrl.github.io/CityGrid-Duel/)
 
