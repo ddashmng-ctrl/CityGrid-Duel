@@ -1,0 +1,29 @@
+name: Logs Pipeline
+on:
+  push:
+    paths:
+      - 'logs/**'
+      - 'output/**.json'
+      - 'scripts/aggregate_logs.py'
+      - 'scripts/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+  pull_request:
+    paths:
+      - 'logs/**'
+      - 'output/**.json'
+      - 'scripts/aggregate_logs.py'
+      - 'scripts/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+
+jobs:
+  process-logs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Aggregate logs
+        run: python3 scripts/aggregate_logs.py --quiet
+      - name: Summarize logs into README
+        run: python3 scripts/summarize_logs.py --quiet
