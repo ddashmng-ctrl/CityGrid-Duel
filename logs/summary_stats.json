@@ -1,0 +1,11 @@
+{
+  "total_logs": 6,
+  "soul_debate_logs": 3,
+  "simulation_results": 3,
+  "avg_entropy": 1.8833,
+  "avg_mutual_information": 0.38,
+  "total_spikes": 4,
+  "avg_grid_draw": 0.5933,
+  "total_violations": 0,
+  "last_updated": "2025-09-23T21:16:43.634198"
+}

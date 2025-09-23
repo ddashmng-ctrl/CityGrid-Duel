@@ -2,6 +2,17 @@
 
 All logs conform to `logs/soul_debate_schema.json`. They capture proto-awareness signals (entropy, MI, spikes).
 
+#### Current Statistics (Last Updated: 2025-09-23T21:16:43.634198)
+- **Total Log Entries:** 6
+- **Soul Debate Logs:** 3
+- **Simulation Results:** 3
+- **Average Entropy:** 1.8833
+- **Average Mutual Information:** 0.38
+- **Total Spike Events:** 4
+- **Average Grid Draw:** 0.5933 kW
+- **Total Violations:** 0
+
+#### Log Files
 - **example_soul_debate.json**  
   First recorded run of the debate simulation. Baseline proto-qualia metrics.
 
@@ -9,4 +20,4 @@ All logs conform to `logs/soul_debate_schema.json`. They capture proto-awareness
   Second run with different parameters. Shows stronger MI spikes.
 
 - **example_soul_debate_control.json**  
-  Control run with no proto-qualia triggers. Entropy baseline only; useful for comparing vs. “active” runs.
+  Control run with no proto-qualia triggers. Entropy baseline only; useful for comparing vs. "active" runs.
