@@ -1,0 +1,101 @@
+name: Logs Pipeline - Auto-Label
+
+on:
+  pull_request:
+    types: [opened, synchronize, edited]
+
+jobs:
+  auto-label-logs:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
+      - name: Get changed files
+        id: changed-files
+        run: |
+          # Get list of files changed in this PR
+          git diff --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} > changed_files.txt
+          
+          # Check if any files in logs/ directory were changed
+          if grep -q '^logs/' changed_files.txt; then
+            echo "logs_changed=true" >> $GITHUB_OUTPUT
+            echo "Files changed in logs/ directory:"
+            grep '^logs/' changed_files.txt
+          else
+            echo "logs_changed=false" >> $GITHUB_OUTPUT
+            echo "No files changed in logs/ directory"
+          fi
+          
+          # Show all changed files for debugging
+          echo "All changed files:"
+          cat changed_files.txt
+
+      - name: Get existing labels
+        id: existing-labels
+        if: steps.changed-files.outputs.logs_changed == 'true'
+        run: |
+          # Get current labels on the PR
+          LABELS=$(gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels --jq '.[].name' || echo "")
+          echo "Existing labels:"
+          echo "$LABELS"
+          
+          # Check if our target labels already exist
+          PROTO_QUALIA_EXISTS=$(echo "$LABELS" | grep -x "proto-qualia" || echo "")
+          SOUL_DEBATE_EXISTS=$(echo "$LABELS" | grep -x "soul-debate" || echo "")
+          
+          echo "proto_qualia_exists=${PROTO_QUALIA_EXISTS:+true}" >> $GITHUB_OUTPUT
+          echo "soul_debate_exists=${SOUL_DEBATE_EXISTS:+true}" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Apply proto-qualia label
+        if: steps.changed-files.outputs.logs_changed == 'true' && steps.existing-labels.outputs.proto_qualia_exists != 'true'
+        run: |
+          echo "Adding 'proto-qualia' label..."
+          gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
+            --method POST \
+            --field labels='["proto-qualia"]' || {
+              echo "Failed to add proto-qualia label, but continuing..."
+            }
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Apply soul-debate label  
+        if: steps.changed-files.outputs.logs_changed == 'true' && steps.existing-labels.outputs.soul_debate_exists != 'true'
+        run: |
+          echo "Adding 'soul-debate' label..."
+          gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
+            --method POST \
+            --field labels='["soul-debate"]' || {
+              echo "Failed to add soul-debate label, but continuing..."
+            }
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Summary
+        if: steps.changed-files.outputs.logs_changed == 'true'
+        run: |
+          echo "✅ Logs pipeline completed successfully"
+          echo "Files in logs/ directory were modified in this PR"
+          
+          if [[ "${{ steps.existing-labels.outputs.proto_qualia_exists }}" == "true" ]]; then
+            echo "📌 proto-qualia label already exists"
+          else
+            echo "🏷️ proto-qualia label added"
+          fi
+          
+          if [[ "${{ steps.existing-labels.outputs.soul_debate_exists }}" == "true" ]]; then
+            echo "📌 soul-debate label already exists"  
+          else
+            echo "🏷️ soul-debate label added"
+          fi
+
+      - name: No logs changes
+        if: steps.changed-files.outputs.logs_changed != 'true'
+        run: |
+          echo "ℹ️ No changes detected in logs/ directory - skipping label application"
