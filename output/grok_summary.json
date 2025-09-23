@@ -1,6 +1,5 @@
 {
-  "simulation_duration_hours": 72,
-  "average_grid_draw_kw": 0.42,
-  "comfort_violations": 0,
-  "seed": 42
+  "avg_grid_kw": 0.033,
+  "comfort_violation_rate_pct": 0,
+  "total_grid_kwh_estimate": 2.3760000000000003
 }
