@@ -1,0 +1,156 @@
+name: Soul Debate Logs Pipeline
+
+on:
+  push:
+    paths:
+      - 'logs/**.json'
+      - 'logs/soul_debate_schema.json'
+      - 'scripts/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+  pull_request:
+    paths:
+      - 'logs/**.json'
+      - 'logs/soul_debate_schema.json'
+      - 'scripts/summarize_logs.py'
+      - '.github/workflows/logs_pipeline.yml'
+  workflow_dispatch:
+
+jobs:
+  process_logs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate JSON schema
+        id: validate_json
+        run: |
+          echo "Validating JSON log files against schema..."
+          # Check if schema file exists
+          if [ ! -f "logs/soul_debate_schema.json" ]; then
+            echo "Error: Schema file logs/soul_debate_schema.json not found"
+            exit 1
+          fi
+          
+          # Validate each log file against the schema
+          python3 -c "
+          import json
+          import glob
+          import sys
+          
+          # Load schema
+          with open('logs/soul_debate_schema.json') as f:
+              schema = json.load(f)
+          
+          # Get all log files
+          log_files = glob.glob('logs/example_soul_debate*.json')
+          
+          if not log_files:
+              print('No log files found to validate')
+              sys.exit(1)
+          
+          errors = []
+          for log_file in log_files:
+              try:
+                  with open(log_file) as f:
+                      content = f.read().replace('\\\\n', '\\n')
+                      log_data = json.loads(content)
+                  
+                  # Basic validation - check required fields from schema
+                  required_fields = ['timestamp', 'session_id', 'branch', 'model', 'seed', 'violations', 'tokens', 'spikes', 'entropy', 'mutual_information', 'text']
+                  
+                  for field in required_fields:
+                      if field not in log_data:
+                          errors.append(f'{log_file}: Missing required field {field}')
+                  
+                  print(f'✓ {log_file} - Valid')
+                  
+              except (json.JSONDecodeError, IOError) as e:
+                  errors.append(f'{log_file}: {e}')
+          
+          if errors:
+              for error in errors:
+                  print(f'✗ {error}')
+              sys.exit(1)
+          
+          print(f'All {len(log_files)} log files are valid')
+          "
+
+      - name: Aggregate log data
+        id: aggregate_logs
+        run: |
+          echo "Aggregating log data for analysis..."
+          python3 -c "
+          import json
+          import glob
+          import sys
+          
+          log_files = glob.glob('logs/example_soul_debate*.json')
+          aggregated_data = {
+              'total_files': len(log_files),
+              'files': [],
+              'summary': {
+                  'total_spikes': 0,
+                  'avg_entropy': 0,
+                  'avg_mi': 0
+              }
+          }
+          
+          total_entropy = 0
+          total_mi = 0
+          
+          for log_file in sorted(log_files):
+              try:
+                  with open(log_file) as f:
+                      content = f.read().replace('\\\\n', '\\n')
+                      log_data = json.loads(content)
+                  
+                  file_info = {
+                      'filename': log_file,
+                      'timestamp': log_data.get('timestamp'),
+                      'spike_count': len(log_data.get('spikes', [])),
+                      'entropy': log_data.get('entropy', 0),
+                      'mutual_information': log_data.get('mutual_information', 0)
+                  }
+                  
+                  aggregated_data['files'].append(file_info)
+                  aggregated_data['summary']['total_spikes'] += file_info['spike_count']
+                  total_entropy += file_info['entropy']
+                  total_mi += file_info['mutual_information']
+                  
+              except Exception as e:
+                  print(f'Error processing {log_file}: {e}')
+                  sys.exit(1)
+          
+          if aggregated_data['total_files'] > 0:
+              aggregated_data['summary']['avg_entropy'] = total_entropy / aggregated_data['total_files']
+              aggregated_data['summary']['avg_mi'] = total_mi / aggregated_data['total_files']
+          
+          print(f'Successfully aggregated data from {aggregated_data[\"total_files\"]} files')
+          print(f'Total spikes: {aggregated_data[\"summary\"][\"total_spikes\"]}')
+          print(f'Average entropy: {aggregated_data[\"summary\"][\"avg_entropy\"]:.3f}')
+          print(f'Average MI: {aggregated_data[\"summary\"][\"avg_mi\"]:.3f}')
+          "
+
+      - name: Summarize logs into README
+        id: summarize_logs
+        run: |
+          echo "Running log summarization..."
+          python3 scripts/summarize_logs.py --quiet
+          
+          # Verify the README was updated
+          if [ ! -f "docs/soul_debate/README.md" ]; then
+            echo "Error: README file was not created/updated"
+            exit 1
+          fi
+          
+          echo "README successfully updated with log summaries"
+          
+          # Show what was generated (for debugging)
+          echo "Generated README content:"
+          cat docs/soul_debate/README.md

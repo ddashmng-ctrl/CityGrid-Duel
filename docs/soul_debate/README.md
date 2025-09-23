@@ -9,4 +9,5 @@ All logs conform to `logs/soul_debate_schema.json`. They capture proto-awareness
   Second run with different parameters. Shows stronger MI spikes.
 
 - **example_soul_debate_control.json**  
-  Control run with no proto-qualia triggers. Entropy baseline only; useful for comparing vs. “active” runs.
+  Control run with no proto-qualia triggers. Entropy baseline only; useful for comparing vs. "active" runs.
+
